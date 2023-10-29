@@ -1,0 +1,3 @@
+{
+  "exclude": ["node_modules/**/*", ".serverless/**/*", ".vscode/**/*", "dist", "*/**/*.test.ts", "tests"],
+}
