@@ -1,9 +1,12 @@
+import { UserDao } from '@db/user/user.dao';
 import { NextFunction, Request, Response } from 'express';
 
-export function controllerMiddleware<T>(callback: (data: T) => any) {
+export function controllerMiddleware<T>(callback: (data: T, user?: UserDao) => any) {
   return async (req: Request, _res: Response, next: NextFunction): Promise<void> => {
     try {
-      const data: T = await callback(req.body);
+      const user = req.body?.user;
+      if (user) delete req.body.user;
+      const data: T = await callback(req.body, user);
       req.body = {
         statusCode: 200,
         body: {

@@ -7,7 +7,7 @@ export function dtoValidationMiddleware<T>(type: new () => T) {
     try {
       // Concatenate data
       req.body = { ...req.params, ...req.body, ...req.query };
-      logger.info({ body: req?.body });
+      logger.info({ bodyDtoValidation: req?.body });
 
       // Validate data
       const objectToValidate = new type();

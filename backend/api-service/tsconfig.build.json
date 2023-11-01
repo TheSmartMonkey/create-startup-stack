@@ -1,3 +1,4 @@
 {
-  "exclude": ["node_modules/**/*", ".serverless/**/*", ".vscode/**/*", "dist", "*/**/*.test.ts", "tests"],
+  "extends": "./tsconfig.json",
+  "exclude": ["node_modules/**/*", ".serverless/**/*", ".vscode/**/*", "dist", "*/**/*.test.ts", "*/**/tests", "serverless.ts"],
 }

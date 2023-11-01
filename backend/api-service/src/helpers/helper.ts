@@ -1,4 +1,4 @@
-import { AwsHttpResponse, HttpResponse } from "@models/http.model";
+import { AwsHttpResponse, HttpResponse } from "@models/global/http.model";
 
 export function formatHttpResponse<T>(response: HttpResponse<T>): AwsHttpResponse {
   return {

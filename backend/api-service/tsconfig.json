@@ -10,6 +10,7 @@
     "experimentalDecorators": true,
 
     "baseUrl": ".",
+    "outDir": "dist",
     "paths": {
       "@api/*": ["src/api/*"],
       "@db/*": ["src/db/*"],
@@ -20,7 +21,7 @@
       "@tests/*": ["src/tests/*"],
     }
   },
-  "include": ["src/**/*.ts", "serverless.ts"],
+  "include": ["src", "serverless.ts"],
   "exclude": ["node_modules/**/*", ".serverless/**/*", "dist"],
   "ts-node": {
     "require": ["tsconfig-paths/register"]

@@ -41,6 +41,9 @@ const serverlessConfiguration: AWS = {
       MONGODB_USERNAME: '${env:MONGODB_USERNAME}',
       MONGODB_PASSWORD: '${env:MONGODB_PASSWORD}',
       MONGODB_NAME: '${env:MONGODB_NAME}',
+
+      // Secure credentials in AWS Systems Manager Parameter Store
+      JWT_TOKEN_SECRET: '${ssm:JWT_TOKEN_SECRET}',
     },
   },
   functions: {

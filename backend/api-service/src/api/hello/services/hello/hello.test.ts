@@ -20,8 +20,7 @@ describe('hello unit', () => {
     const response = await helloService(helloDto);
 
     // Then
-    expect(response.statusCode).toEqual(200);
-    expect(response.body.data).toEqual({ message });
+    expect(response).toEqual({ message });
   });
 
   test('Should return a empty message', async () => {
@@ -33,7 +32,6 @@ describe('hello unit', () => {
     const response = await helloService(helloDto);
 
     // Then
-    expect(response.statusCode).toEqual(200);
-    expect(response.body.data).toEqual({ message });
+    expect(response).toEqual({ message });
   });
 });
