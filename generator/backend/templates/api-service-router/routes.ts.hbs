@@ -1,0 +1,11 @@
+import { controllerMiddleware } from '@middlewares/controller.middleware';
+import { dtoValidationMiddleware } from '@middlewares/dto-validation.middleware';
+import { Router } from 'express';
+import { {{titlecase name}}Dto } from './dtos/{{name}}.dto';
+import { {{name}}Service } from './services/{{name}}/{{name}}.service';
+
+const router = Router();
+
+router.get('/message/:message', dtoValidationMiddleware({{titlecase name}}Dto), controllerMiddleware({{name}}Service));
+
+export default router;

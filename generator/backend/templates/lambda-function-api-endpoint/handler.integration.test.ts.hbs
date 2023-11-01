@@ -1,0 +1,18 @@
+/**
+ * @group integration
+ */
+import { describe, expect, test } from '@jest/globals';
+import { initIntegrationTests } from '@libs/tests/utils';
+
+describe('{{name}} integration', () => {
+  beforeAll(() => {
+    initIntegrationTests({ debug: false });
+  });
+
+  test('Should return true', async () => {
+    // Given
+    // When
+    // Then
+    expect(true).toEqual(true);
+  });
+});

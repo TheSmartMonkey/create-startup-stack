@@ -1,0 +1,10 @@
+import { generators } from '../generators.mjs';
+import { {{name}}Actions } from './actions.mjs';
+import { {{name}}Prompts } from './prompts.mjs';
+
+export function {{name}}Generator(plop) {
+  {{name}}.setGenerator(generators.{{name}}, {
+    prompts: {{name}}Prompts(),
+    actions: (data) => {{name}}Actions(data),
+  });
+}

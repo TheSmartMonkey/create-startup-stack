@@ -1,0 +1,11 @@
+{
+  "name": "generator",
+  "version": "1.0.0",
+  "main": "plopfile.mjs",
+  "scripts": {
+    "gen": "plop"
+  },
+  "devDependencies": {
+    "plop": "^3.1.2"
+  }
+}

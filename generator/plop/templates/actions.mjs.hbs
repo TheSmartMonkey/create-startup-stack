@@ -1,0 +1,19 @@
+import { {{name}}Tempates } from './templates.mjs';
+
+export function {{name}}Actions(data) {
+  console.log(data);
+  return [...test(data)];
+}
+
+function test(data) {
+  if (data.template.includes({{name}}Tempates.endpoint)) {
+    return [
+      {
+        type: 'add',
+        path: 'src/functions',
+        templateFile: `{{name}}/templates/handler.ts.hbs`,
+      },
+    ];
+  }
+  return [];
+}
