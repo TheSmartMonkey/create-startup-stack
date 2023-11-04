@@ -1,5 +1,5 @@
 import { formatHttpResponse } from '@helpers/helper';
-import { logger } from '@helpers/logger';
+import { logger } from '@libs/logger';
 import { Request, Response } from 'express';
 
 export function sendJsonMiddleware(req: Request, res: Response): void {

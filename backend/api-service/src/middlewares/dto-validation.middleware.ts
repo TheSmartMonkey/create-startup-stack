@@ -1,4 +1,4 @@
-import { logger } from '@helpers/logger';
+import { logger } from '@libs/logger';
 import { validateOrReject } from 'class-validator';
 import { NextFunction, Request, Response } from 'express';
 

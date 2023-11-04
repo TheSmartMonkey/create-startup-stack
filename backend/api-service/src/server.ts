@@ -1,5 +1,5 @@
 import { BASE_URL } from '@helpers/constants';
-import { logger } from '@helpers/logger';
+import { logger } from '@libs/logger';
 import { errorHandlerMiddleware } from '@middlewares/error.middleware';
 import { sendJsonMiddleware } from '@middlewares/send-json.middleware';
 import dotenv from 'dotenv';

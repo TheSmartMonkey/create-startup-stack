@@ -1,6 +1,6 @@
 import { UserDao } from '@db/user/user.dao';
-import { logger } from '@helpers/logger';
-import { HttpError } from '@models/global/error.model';
+import { logger } from '@libs/logger';
+import { HttpError } from '@models/global/http-error.model';
 import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
 

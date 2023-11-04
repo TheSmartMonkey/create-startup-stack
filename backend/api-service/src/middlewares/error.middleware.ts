@@ -1,5 +1,5 @@
 import { formatHttpResponse } from '@helpers/helper';
-import { logger } from '@helpers/logger';
+import { logger } from '@libs/logger';
 import { NextFunction, Request, Response } from 'express';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

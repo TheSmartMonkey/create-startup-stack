@@ -1,7 +1,7 @@
-import { Request } from 'express';
+import { HttpCodes } from "./http-codes.model";
 
 export type HttpResponse<T> = {
-  statusCode: number;
+  statusCode: HttpCodes;
   body: {
     message: string;
     data?: T;
@@ -10,8 +10,6 @@ export type HttpResponse<T> = {
 };
 
 export type AwsHttpResponse = {
-  statusCode: number;
+  statusCode: HttpCodes;
   body: string;
 };
-
-export type ExpressRequest<T> = Request & { data: T };
