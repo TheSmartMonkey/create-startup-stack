@@ -1,6 +1,6 @@
 import { backendTempates } from './templates.mjs';
 
-export function serverlessPrompts() {
+export function backendPrompts() {
   return [
     {
       type: 'list',
@@ -10,35 +10,27 @@ export function serverlessPrompts() {
     },
     {
       when(context) {
-        return context.template.includes(backendTempates.endpoint);
-      },
-      type: 'input',
-      name: 'name',
-      message: 'Choose a lambda function name',
-    },
-    {
-      when(context) {
-        return context.template.includes(backendTempates.handlerTest);
-      },
-      type: 'input',
-      name: 'name',
-      message: 'Choose test file name',
-    },
-    {
-      when(context) {
-        return context.template.includes(backendTempates.handlerIntegrationTest);
-      },
-      type: 'input',
-      name: 'name',
-      message: 'Choose integration test file name',
-    },
-    {
-      when(context) {
-        return context.template.includes(backendTempates.apiServiceRouter);
+        return context.template === backendTempates.API_SERVICE_ROUTER;
       },
       type: 'input',
       name: 'name',
       message: 'Choose router name',
+    },
+    {
+      when(context) {
+        return context.template === backendTempates.SERVICE;
+      },
+      type: 'input',
+      name: 'name',
+      message: 'Choose service name',
+    },
+    {
+      when(context) {
+        return context.template === backendTempates.SERVICE;
+      },
+      type: 'input',
+      name: 'path',
+      message: 'Choose path (ex: api-service/src/api/hello/services)',
     },
   ];
 }

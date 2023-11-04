@@ -1,0 +1,8 @@
+{
+  "name": "create-startup-stack",
+  "version": "1.0.0",
+  "description": "Dev stack perfect to create a startup saas application that is architectured for simplicity and fast coding feature",
+  "scripts": {
+    "gen": "cd generator && npm run gen"
+  }
+}

@@ -1,6 +1,6 @@
-import { plopGenerator } from './plop/generator.mjs';
-import { serverlessGenerator } from './backend/generator.mjs';
+import { backendGenerator } from './backend/generator.mjs';
 import { toKebabCase, toTitleCase } from './helpers.mjs';
+import { plopGenerator } from './plop/generator.mjs';
 
 export default (plop) => {
   // Helpers
@@ -8,6 +8,6 @@ export default (plop) => {
   plop.setHelper('kebabcase', (text) => toKebabCase(text));
 
   // Generators
-  serverlessGenerator(plop);
+  backendGenerator(plop);
   plopGenerator(plop);
 };
