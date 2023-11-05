@@ -16,7 +16,7 @@
       "@db/*": ["../common/db/*"],
       "@helpers/*": ["src/helpers/*"],
       "@middlewares/*": ["src/middlewares/*"],
-      "@models/*": ["../../common/models/*"],
+      "@models/*": ["../../shared/models/*"],
       "@services/*": ["../common/services/*"],
       "@libs/*": ["../common/libs/*"],
       "@tests/*": ["src/tests/*"],
