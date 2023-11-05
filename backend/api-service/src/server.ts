@@ -2,6 +2,7 @@ import { BASE_URL } from '@helpers/constants';
 import { logger } from '@libs/logger';
 import { errorHandlerMiddleware } from '@middlewares/error.middleware';
 import { sendJsonMiddleware } from '@middlewares/send-json.middleware';
+import { HttpError } from '@models/global/http-error.model';
 import dotenv from 'dotenv';
 import express from 'express';
 import serverless from 'serverless-http';
@@ -16,6 +17,10 @@ app.use(express.json());
 app.use('/', routes);
 
 // Middlewares
+app.use(function (req, res, next) {
+  if (!req.route) return next(new HttpError(404, 'ROUTE_DOES_NOT_EXIST'));
+  next();
+});
 app.use(sendJsonMiddleware);
 app.use(errorHandlerMiddleware);
 
