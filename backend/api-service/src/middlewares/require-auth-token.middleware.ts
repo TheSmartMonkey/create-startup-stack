@@ -15,7 +15,7 @@ export function requireAuthToken(req: Request, _res: Response, next: NextFunctio
     verify(token, process.env.JWT_TOKEN_SECRET ?? '', (error: any, user: UserDao) => {
       if (error) throw new HttpError(403, 'UNCORRECT_TOKEN_VERIFICATION_FAILED');
       req.body = { ...req.body, user };
-      logger.info({ bodyRequireAuthTokenUser: req?.body });
+      logger.info({ bodyRequireAuthTokenUser: req?.body, originalUrl: req.originalUrl });
       next();
     });
   } catch (error: any) {

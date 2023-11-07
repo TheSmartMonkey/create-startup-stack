@@ -10,7 +10,7 @@ export default {
     '@db/(.*)': '<rootDir>/../common/db/$1',
     '@helpers/(.*)': '<rootDir>/src/helpers/$1',
     '@middlewares/(.*)': '<rootDir>/src/middlewares/$1',
-    '@models/(.*)': '<rootDir>/../../common/models/$1',
+    '@models/(.*)': '<rootDir>/../../shared/models/$1',
     '@services/(.*)': '<rootDir>/../common/services/$1',
     '@libs/(.*)': '<rootDir>/../common/libs/$1',
     '@tests/(.*)': '<rootDir>/src/tests/$1',

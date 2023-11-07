@@ -17,7 +17,7 @@ describe('hello unit', () => {
     const helloDto = fakeHelloDto({ message });
 
     // When
-    const response = await helloService(helloDto);
+    const response = await helloService({ data: helloDto });
 
     // Then
     expect(response).toEqual({ message });
@@ -29,7 +29,7 @@ describe('hello unit', () => {
     const helloDto = fakeHelloDto({ message });
 
     // When
-    const response = await helloService(helloDto);
+    const response = await helloService({ data: helloDto });
 
     // Then
     expect(response).toEqual({ message });

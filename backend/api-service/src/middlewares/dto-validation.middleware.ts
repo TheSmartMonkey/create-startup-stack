@@ -2,12 +2,12 @@ import { logger } from '@libs/logger';
 import { validateOrReject } from 'class-validator';
 import { NextFunction, Request, Response } from 'express';
 
-export function dtoValidationMiddleware<T>(type: new () => T) {
+export function dtoValidation<T>(type: new () => T) {
   return async (req: Request, _res: Response, next: NextFunction): Promise<void> => {
     try {
       // Concatenate data
       req.body = { ...req.params, ...req.body, ...req.query };
-      logger.info({ bodyDtoValidation: req?.body });
+      logger.info({ bodyDtoValidation: req?.body, originalUrl: req.originalUrl });
 
       // Validate data
       const objectToValidate = new type();
