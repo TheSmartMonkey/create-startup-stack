@@ -1,7 +1,0 @@
-{
-  "name": "libs",
-  "dependencies": {
-    "pino": "^8.6.1",
-    "typescript": "^4.8.3"
-  }
-}

@@ -1,0 +1,9 @@
+import { randomUUID } from 'crypto';
+
+export function fakeUser(partial?: Partial<any>): any {
+  return {
+    _id: randomUUID(),
+    email: 'fake@gmail.com',
+    ...partial,
+  };
+}

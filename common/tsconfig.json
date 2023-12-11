@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@api/*": ["../backend/api/src/*"],
+      "@db/*": ["db/*"],
+      "@helpers/*": ["helpers/*"],
+      "@models/*": ["models/*"],
+      "@sdk/*": ["sdk/*"],
+      "@services/*": ["services/*"],
+      "@tests/*": ["tests/*"],
+    }
+  }
+}

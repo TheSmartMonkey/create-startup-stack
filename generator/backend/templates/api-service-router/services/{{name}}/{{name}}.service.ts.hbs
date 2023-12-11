@@ -1,5 +1,5 @@
 import { {{titlecase name}}Dto } from '@api/{{name}}/dtos/{{name}}.dto';
-import { logger } from '@libs/logger';
+import { logger } from '@helpers/logger';
 
 export async function {{name}}Service({{name}}Dto: {{titlecase name}}Dto): Promise<any> {
   logger.info({ message: {{name}}Dto.message }, '{{name}} message');

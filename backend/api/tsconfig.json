@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "commonjs",
+    "declaration": true,
+    "strict": false,
+    "lib": ["es2015"],
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+
+    "baseUrl": ".",
+    "outDir": "dist",
+    "paths": {
+      "@src/*": ["src/*"],
+      "@db/*": ["../../common/db/*"],
+      "@helpers/*": ["../../common/helpers/*"],
+      "@middlewares/*": ["../../framework/middlewares/*"],
+      "@models/*": ["../../common/models/*"],
+      "@services/*": ["../../common/services/*"],
+      "@tests/*": ["../../common/tests/*"],
+    }
+  },
+  "include": ["src", "serverless.ts", "../common/libs/logger.ts", "../../common/middlewares", "../../common/tests", "../../common/helpers/helpers"],
+  "exclude": ["node_modules/**/*", ".serverless/**/*", "dist"],
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@api/*": ["../backend/api/src/*"],
+      "@db/*": ["../common/db/*"],
+      "@helpers/*": ["../common/helpers/*"],
+      "@middlewares/*": ["middlewares/*"],
+      "@models/*": ["../common/models/*"],
+      "@sdk/*": ["../common/sdk/*"],
+      "@services/*": ["../common/services/*"],
+      "@tests/*": ["../common/tests/*"],
+    }
+  }
+}

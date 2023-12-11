@@ -1,7 +1,0 @@
-{
-  "name": "db",
-  "dependencies": {
-    "mongoose": "^6.9.0",
-    "typescript": "^4.8.3"
-  }
-}
