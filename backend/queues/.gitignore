@@ -1,0 +1,12 @@
+node_modules
+dist
+.esbuild
+.serverless
+junit.xml
+openapitools.json
+test.ts
+.idea/
+.env
+script/test-files-ignored/**/*.json
+script.ts
+.env-test
