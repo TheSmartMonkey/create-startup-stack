@@ -9,10 +9,10 @@ import { Generate } from '@libs/tests/generate';
 import { initE2eTests } from '@libs/tests/init-e2e';
 import { logger } from '@libs/utils/logger';
 import { MODELS } from '@models/api.model';
-import { MailgunEventEnum } from '@models/mailgun/mailgun-events.model';
-import { E2e } from './e2e';
-import { ObjectId } from 'bson';
 import { DB_COLLECTIONS } from '@models/db.model';
+import { MailgunEventEnum } from '@models/mailgun/mailgun-events.model';
+import { ObjectId } from 'bson';
+import { E2e } from './e2e';
 
 jest.setTimeout(50000);
 
@@ -67,7 +67,7 @@ describe('SNS filters e2e', () => {
   test('Should update pro send message to dlq when email does not exist', async () => {
     // Given
     const message1 = new Fake().mailgunEvent({});
-    const queueName = `mailing-webhook-service-update-pros-queue-dlq-${process.env.AWS_STAGE}`;
+    const queueName = `queue-service-update-pros-queue-dlq-${process.env.AWS_STAGE}`;
     await new Generate().deleteAllpros();
     await e2e.deleteAllMessagesFromQueue(queueName);
 
@@ -83,7 +83,7 @@ describe('SNS filters e2e', () => {
   test('Should create a new newsletter stats when unsubscribe', async () => {
     // Given
     const message1 = new Fake().mailgunEvent({ eventData: { event: MailgunEventEnum.UNSUBSCRIBES }, messageId: 'fake_message_id' });
-    const queueName = `mailing-webhook-service-unsubscribe-newsletter-queue-dlq-${process.env.AWS_STAGE}`;
+    const queueName = `queue-service-unsubscribe-newsletter-queue-dlq-${process.env.AWS_STAGE}`;
     const innovationId = new ObjectId('6572deb29da3b140a8598ae1');
     await mongoDbInstance.collection(DB_COLLECTIONS.Innovation).insertMany([{ _id: innovationId }]);
     const mailService1 = new Fake().mailService(innovationId.toString(), 'fake_message_id');

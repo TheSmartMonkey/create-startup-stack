@@ -23,9 +23,6 @@ export default {
       Queues: [
         { Ref: '${self:custom.addToBlacklistQueue}' },
         { Ref: '${self:custom.addToBouncedQueue}' },
-        { Ref: '${self:custom.addToMailEventsQueue}' },
-        { Ref: '${self:custom.updateProsQueue}' },
-        { Ref: '${self:custom.unsubscribeNewsletterQueue}' },
         { Ref: '${self:custom.mailingTopicRedirectionKeepOtherEventsQueue}' },
         { Ref: '${self:custom.mailingTopicRedirectionKeepAllMessagesQueue}' },
         { Ref: '${self:custom.mailingTopicRedirectionQueueDLQ}' },
@@ -34,9 +31,6 @@ export default {
     DependsOn: [
       'AddToBlacklistSubscription',
       'AddToBouncedSubscription',
-      'AddToMailEventsSubscription',
-      'UpdateProsSubscription',
-      'UnsubscribeNewsletterSubscription',
       'MailingTopicRedirectionKeepAllMessagesSubscription',
       'MailingTopicRedirectionKeepOtherEventsSubscription',
     ],

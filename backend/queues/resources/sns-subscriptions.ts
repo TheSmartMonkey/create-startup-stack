@@ -1,7 +1,4 @@
-import { MailgunEntityEnum, mailgunEventsByEntity } from '@models/mailgun/mailgun-events.model';
-
-// const ALARM_EMAIL_LAURENT = 'lvandelle@umi-innovation.com';
-// const ALARM_EMAIL_MORGANE = 'mdarrigade@umi-innovation.com';
+import { mailgunEventsByEntity } from '@models/mailgun/mailgun-events.model';
 
 /**
  * Don't forgot to add your Subscription in sns.ts > DependsOn and your queue in sns.ts > Queues
@@ -48,78 +45,6 @@ export default {
       FilterPolicy: {
         'event-data': {
           event: mailgunEventsByEntity.bounced,
-        },
-      },
-      RedrivePolicy: {
-        deadLetterTargetArn: {
-          'Fn::GetAtt': ['${self:custom.mailingTopicRedirectionQueueDLQ}', 'Arn'],
-        },
-      },
-    },
-  },
-  AddToMailEventsSubscription: {
-    DependsOn: ['${self:custom.addToMailEventsQueue}'],
-    Type: 'AWS::SNS::Subscription',
-    Properties: {
-      Protocol: 'sqs',
-      Endpoint: {
-        'Fn::GetAtt': ['${self:custom.addToMailEventsQueue}', 'Arn'],
-      },
-      TopicArn: {
-        Ref: '${self:custom.mailingTopic}',
-      },
-      FilterPolicyScope: 'MessageBody',
-      FilterPolicy: {
-        'event-data': {
-          event: mailgunEventsByEntity.all,
-        },
-      },
-      RedrivePolicy: {
-        deadLetterTargetArn: {
-          'Fn::GetAtt': ['${self:custom.mailingTopicRedirectionQueueDLQ}', 'Arn'],
-        },
-      },
-    },
-  },
-  UpdateProsSubscription: {
-    DependsOn: ['${self:custom.updateProsQueue}'],
-    Type: 'AWS::SNS::Subscription',
-    Properties: {
-      Protocol: 'sqs',
-      Endpoint: {
-        'Fn::GetAtt': ['${self:custom.updateProsQueue}', 'Arn'],
-      },
-      TopicArn: {
-        Ref: '${self:custom.mailingTopic}',
-      },
-      FilterPolicyScope: 'MessageBody',
-      FilterPolicy: {
-        'event-data': {
-          event: mailgunEventsByEntity.pro,
-        },
-      },
-      RedrivePolicy: {
-        deadLetterTargetArn: {
-          'Fn::GetAtt': ['${self:custom.mailingTopicRedirectionQueueDLQ}', 'Arn'],
-        },
-      },
-    },
-  },
-  UnsubscribeNewsletterSubscription: {
-    DependsOn: ['${self:custom.unsubscribeNewsletterQueue}'],
-    Type: 'AWS::SNS::Subscription',
-    Properties: {
-      Protocol: 'sqs',
-      Endpoint: {
-        'Fn::GetAtt': ['${self:custom.unsubscribeNewsletterQueue}', 'Arn'],
-      },
-      TopicArn: {
-        Ref: '${self:custom.mailingTopic}',
-      },
-      FilterPolicyScope: 'MessageBody',
-      FilterPolicy: {
-        'event-data': {
-          event: mailgunEventsByEntity.unsubscribe,
         },
       },
       RedrivePolicy: {
@@ -177,34 +102,4 @@ export default {
       },
     },
   },
-
-  // TODO: Alarms don't works as expected
-  // Email (disabled for now)
-  // ...Utils.getAnyByStageType({
-  //   prod: {
-  //     DLQAlarmLaurentSubscription: {
-  //       DependsOn: ['${self:custom.mailingTopic}'],
-  //       Type: 'AWS::SNS::Subscription',
-  //       Properties: {
-  //         Protocol: 'email',
-  //         Endpoint: ALARM_EMAIL_LAURENT,
-  //         TopicArn: {
-  //           Ref: '${self:custom.mailingTopic}',
-  //         },
-  //       },
-  //     },
-  //     DLQAlarmMorganeSubscription: {
-  //       DependsOn: ['${self:custom.mailingTopic}'],
-  //       Type: 'AWS::SNS::Subscription',
-  //       Properties: {
-  //         Protocol: 'email',
-  //         Endpoint: ALARM_EMAIL_MORGANE,
-  //         TopicArn: {
-  //           Ref: '${self:custom.mailingTopic}',
-  //         },
-  //       },
-  //     },
-  //   },
-  //   dev: {},
-  // }),
 };

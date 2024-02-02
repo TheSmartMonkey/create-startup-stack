@@ -21,7 +21,7 @@ describe('DLQ e2e', () => {
   test('Should add to redirection-keep-all-messages-queue', async () => {
     // Given
     const message1 = { messageId: Utils.generateUUID() };
-    const queueName = `mailing-webhook-service-redirection-keep-all-messages-queue-${process.env.AWS_STAGE}`;
+    const queueName = `queue-service-redirection-keep-all-messages-queue-${process.env.AWS_STAGE}`;
     await e2e.deleteAllMessagesFromQueue(queueName);
 
     // When
@@ -36,7 +36,7 @@ describe('DLQ e2e', () => {
   test('Should add to redirection-other-events-queue', async () => {
     // Given
     const message1 = { messageId: Utils.generateUUID(), 'event-data': { event: 'unknown' } };
-    const queueName = `mailing-webhook-service-redirection-keep-other-events-queue-${process.env.AWS_STAGE}`;
+    const queueName = `queue-service-redirection-keep-other-events-queue-${process.env.AWS_STAGE}`;
     await e2e.deleteAllMessagesFromQueue(queueName);
 
     // When
@@ -51,7 +51,7 @@ describe('DLQ e2e', () => {
   test('Should add to add-to-bounced-queue-dlq', async () => {
     // Given
     const message1 = { messageId: crypto.randomUUID(), 'event-data': { event: MailgunEventEnum.PERMANENT_OR_TEMPORARY_FAILURE } };
-    const queueName = `mailing-webhook-service-add-to-bounced-queue-dlq-${process.env.AWS_STAGE}`;
+    const queueName = `queue-service-add-to-bounced-queue-dlq-${process.env.AWS_STAGE}`;
     await e2e.deleteAllMessagesFromQueue(queueName);
 
     // When
@@ -67,7 +67,7 @@ describe('DLQ e2e', () => {
   test('Should add to add-to-blacklist-queue-dlq', async () => {
     // Given
     const message1 = { messageId: crypto.randomUUID(), 'event-data': { event: MailgunEventEnum.UNSUBSCRIBES } };
-    const queueName = `mailing-webhook-service-add-to-blacklist-queue-dlq-${process.env.AWS_STAGE}`;
+    const queueName = `queue-service-add-to-blacklist-queue-dlq-${process.env.AWS_STAGE}`;
     await e2e.deleteAllMessagesFromQueue(queueName);
 
     // When
@@ -83,7 +83,7 @@ describe('DLQ e2e', () => {
   test('Should add to add-to-mail-events-queue-dlq', async () => {
     // Given
     const message1 = { messageId: crypto.randomUUID(), 'event-data': { event: MailgunEventEnum.DELIVERED_MESSAGE } };
-    const queueName = `mailing-webhook-service-add-to-mail-events-queue-dlq-${process.env.AWS_STAGE}`;
+    const queueName = `queue-service-add-to-mail-events-queue-dlq-${process.env.AWS_STAGE}`;
     await e2e.deleteAllMessagesFromQueue(queueName);
 
     // When
@@ -99,7 +99,7 @@ describe('DLQ e2e', () => {
   test('Should add to update-pros-queue-dlq', async () => {
     // Given
     const message1 = { messageId: crypto.randomUUID(), 'event-data': { event: MailgunEventEnum.OPENS } };
-    const queueName = `mailing-webhook-service-update-pros-queue-dlq-${process.env.AWS_STAGE}`;
+    const queueName = `queue-service-update-pros-queue-dlq-${process.env.AWS_STAGE}`;
     await e2e.deleteAllMessagesFromQueue(queueName);
 
     // When
@@ -115,7 +115,7 @@ describe('DLQ e2e', () => {
   test('Should add to unsubscribe-newsletter', async () => {
     // Given
     const message1 = { messageId: crypto.randomUUID(), 'event-data': { event: MailgunEventEnum.UNSUBSCRIBES } };
-    const queueName = `mailing-webhook-service-unsubscribe-newsletter-queue-dlq-${process.env.AWS_STAGE}`;
+    const queueName = `queue-service-unsubscribe-newsletter-queue-dlq-${process.env.AWS_STAGE}`;
     await e2e.deleteAllMessagesFromQueue(queueName);
 
     // When

@@ -2,11 +2,8 @@ import type { AWS } from '@serverless/typescript';
 import { Routes } from 'src/routes';
 
 // Lambda functions
-import addToBlacklist from './src/functions/add-to-blacklist';
-import addToBounced from './src/functions/add-to-bounced';
-import addToMailEvents from './src/functions/add-to-mail-events';
-import updatePros from './src/functions/update-pros';
-import unsubscribeNewsletter from './src/functions/unsubscribe-newsletter';
+import addToBlacklist from './src/functions/hello';
+import addToBounced from './src/functions/create-todo';
 
 // Resources
 import customQueueNames from 'resources/custom-queue-names';
@@ -16,7 +13,7 @@ import snsSubscriptions from 'resources/sns-subscriptions';
 import sqs from 'resources/sqs';
 
 const serverlessConfiguration: AWS = {
-  service: 'mailing-webhook-service',
+  service: 'queue-service',
   frameworkVersion: '3',
   useDotenv: true,
   custom: {
@@ -78,51 +75,23 @@ const serverlessConfiguration: AWS = {
         Action: ['SQS:SendMessage', 'SQS:SendMessageBatch', 'SQS:ReceiveMessage', 'SQS:DeleteMessage', 'SQS:GetQueueAttributes'],
         Resource: '*',
       },
-      {
-        Effect: 'Allow',
-        Action: [
-          'ec2:DescribeNetworkInterfaces',
-          'ec2:CreateNetworkInterface',
-          'ec2:DeleteNetworkInterface',
-          'ec2:DescribeInstances',
-          'ec2:AttachNetworkInterface',
-        ],
-        Resource: '*',
-      },
-      {
-        Effect: 'Allow',
-        Action: ['ssm:DescribeParameters', 'ssm:GetParameter', 'ssm:GetParameters', 'ssm:GetParametersByPath'],
-        Resource: '*',
-      },
     ],
     environment: {
       // .env variables
-      MONGODB_USERNAME: '${env:MONGODB_USERNAME}',
-      MONGODB_USERNAME_PROD: '${env:MONGODB_USERNAME_PROD}',
-      MONGODB_PWD: '${env:MONGODB_PWD}',
       ATLAS_DB_URL: '${env:ATLAS_DB_URL}',
-      MONGODB_NAME_UMI_PROD: '${env:MONGODB_NAME_UMI_PROD}',
+      MONGODB_USERNAME: '${env:MONGODB_USERNAME}',
+      MONGODB_PASSWORD: '${env:MONGODB_PASSWORD}',
+      MONGODB_NAME: '${env:MONGODB_NAME}',
       AWS_STAGE: '${self:provider.stage}',
 
-      // Secure credentials in AWS Systems Manager Parameter Store
-      MONGODB_PWD_PROD: '${ssm:MONGODB_PWD_PROD}',
-      ATLAS_DB_URL_PROD: '${ssm:ATLAS_DB_URL_PROD}',
-      MAILGUN_DOMAIN_KEY: '${ssm:MAILGUN_DOMAIN_KEY}',
-
       // DLQ variables
-      ADD_TO_BLACKLIST_QUEUE_DLQ_NAME: '${self:custom.addToBlacklistQueueDLQName}',
-      ADD_TO_BOUNCED_QUEUE_DLQ_NAME: '${self:custom.addToBouncedQueueDLQName}',
-      ADD_TO_MAIL_EVENTS_QUEUE_DLQ_NAME: '${self:custom.addToMailEventsQueueDLQName}',
-      UPDATE_PROS_EVENTS_QUEUE_DLQ_NAME: '${self:custom.updateProsQueueDLQName}',
-      UNSUBSCRIBE_NEWSLETTER_EVENTS_QUEUE_DLQ_NAME: '${self:custom.unsubscribeNewsletterQueueDLQName}',
+      HELLO_QUEUE_DLQ_NAME: '${self:custom.addToBlacklistQueueDLQName}',
+      CREATE_TODO_QUEUE_DLQ_NAME: '${self:custom.addToBouncedQueueDLQName}',
     },
   },
   functions: {
     addToBlacklist,
     addToBounced,
-    addToMailEvents,
-    updatePros,
-    unsubscribeNewsletter,
   },
   package: {
     // When true optimise lambda performance but increase deployment time

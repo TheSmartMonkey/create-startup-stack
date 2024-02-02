@@ -1,5 +1,5 @@
 {
-  "name": "mailing-webhook-service",
+  "name": "queue-service",
   "version": "1.0.0",
   "scripts": {
     "lint": "eslint src --ext .ts",
@@ -13,8 +13,8 @@
     "integration": "NO_LOGS=true jest --group=integration --maxWorkers=1"
   },
   "engines": {
-    "npm": "9.8.1",
-    "node": "18.15.0"
+    "npm": "9.5.1",
+    "node": "18.16.0"
   },
   "dependencies": {
     "@aws-sdk/client-sqs": "^3.282.0",

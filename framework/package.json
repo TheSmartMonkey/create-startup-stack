@@ -1,6 +1,7 @@
 {
   "name": "framework",
   "dependencies": {
+    "@aws-sdk/client-sqs": "^3.282.0",
     "express": "^4.18.2",
     "aws-sdk": "^2.1282.0",
     "class-validator": "^0.14.0",

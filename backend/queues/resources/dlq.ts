@@ -13,25 +13,6 @@ export default {
       MessageRetentionPeriod: 1209600, // 14 days in seconds
     },
   },
-  AddToMailEventsQueueDLQ: {
-    Type: 'AWS::SQS::Queue',
-    Properties: {
-      QueueName: '${self:custom.addToMailEventsQueueDLQName}',
-      MessageRetentionPeriod: 1209600, // 14 days in seconds
-    },
-  },
-  UpdateProsQueueDLQ: {
-    Type: 'AWS::SQS::Queue',
-    Properties: {
-      QueueName: '${self:custom.updateProsQueueDLQName}',
-    },
-  },
-  UnsubscribeNewsletterQueueDLQ: {
-    Type: 'AWS::SQS::Queue',
-    Properties: {
-      QueueName: '${self:custom.unsubscribeNewsletterQueueDLQName}',
-    },
-  },
   MailingTopicRedirectionKeepAllMessagesQueue: {
     Type: 'AWS::SQS::Queue',
     Properties: {
