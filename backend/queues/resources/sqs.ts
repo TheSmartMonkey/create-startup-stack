@@ -1,24 +1,24 @@
 export default {
-  AddToBlacklistQueue: {
+  HelloQueue: {
     Type: 'AWS::SQS::Queue',
     Properties: {
-      QueueName: '${self:custom.addToBlacklistQueueName}',
+      QueueName: '${self:custom.helloQueueName}',
       RedrivePolicy: {
         deadLetterTargetArn: {
-          'Fn::GetAtt': ['${self:custom.addToBlacklistQueueDLQ}', 'Arn'],
+          'Fn::GetAtt': ['${self:custom.helloQueueDLQ}', 'Arn'],
         },
         maxReceiveCount: 3,
       },
       VisibilityTimeout: 900,
     },
   },
-  AddToBouncedQueue: {
+  CreateTodoQueue: {
     Type: 'AWS::SQS::Queue',
     Properties: {
-      QueueName: '${self:custom.addToBouncedQueueName}',
+      QueueName: '${self:custom.createTodoQueueName}',
       RedrivePolicy: {
         deadLetterTargetArn: {
-          'Fn::GetAtt': ['${self:custom.addToBouncedQueueDLQ}', 'Arn'],
+          'Fn::GetAtt': ['${self:custom.createTodoQueueDLQ}', 'Arn'],
         },
         maxReceiveCount: 3,
       },

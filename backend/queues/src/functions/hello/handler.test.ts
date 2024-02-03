@@ -7,13 +7,13 @@ import { MongooseAdapter } from '@libs/adapter/mongoose.adapter';
 import { ProDb } from '@libs/db/pro/pro.db';
 import { WebhookDuplicatesDb } from '@libs/db/webhook-duplicates/webhook-duplicates.db';
 import { Fake, TEST_EMAIL_2 } from '@libs/tests/fake';
-import { initUnitTests, InitUnitTestsSpies, initUnitTestsSpies } from '@libs/tests/init-unit';
+import { InitUnitTestsSpies, initUnitTests, initUnitTestsSpies } from '@libs/tests/init-unit';
 import { executeLambdaSQS, generateValidatedSQSEvent, mockGetDuplicatesAndNoneDuplicates } from '@libs/tests/mocks';
 import { MODELS } from '@models/api.model';
 import { MailgunEventEnum } from '@models/mailgun/mailgun-events.model';
 import { main } from './handler';
 
-describe('addToBlacklist unit', () => {
+describe('hello unit', () => {
   let initSpies: InitUnitTestsSpies;
   let getDuplicatesAndNoneDuplicatesSpy: jest.SpyInstance;
   let insertManyBlacklistSpy: jest.SpyInstance;

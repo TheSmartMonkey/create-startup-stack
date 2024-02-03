@@ -1,21 +1,21 @@
 export default {
-  // AddToBlacklistQueue
-  addToBlacklistQueue: 'AddToBlacklistQueue',
-  addToBlacklistQueueName: '${self:service}-add-to-blacklist-queue-${self:provider.stage}',
-  addToBlacklistQueueArn: {
-    'Fn::Join': [':', ['arn', 'aws', 'sqs', { Ref: 'AWS::Region' }, { Ref: 'AWS::AccountId' }, '${self:custom.addToBlacklistQueueName}']],
+  // HelloQueue
+  helloQueue: 'HelloQueue',
+  helloQueueName: '${self:service}-add-to-blacklist-queue-${self:provider.stage}',
+  helloQueueArn: {
+    'Fn::Join': [':', ['arn', 'aws', 'sqs', { Ref: 'AWS::Region' }, { Ref: 'AWS::AccountId' }, '${self:custom.helloQueueName}']],
   },
-  addToBlacklistQueueDLQ: 'AddToBlacklistQueueDLQ',
-  addToBlacklistQueueDLQName: '${self:service}-add-to-blacklist-queue-dlq-${self:provider.stage}',
+  helloQueueDLQ: 'HelloQueueDLQ',
+  helloQueueDLQName: '${self:service}-add-to-blacklist-queue-dlq-${self:provider.stage}',
 
-  // AddToBouncedQueue
-  addToBouncedQueue: 'AddToBouncedQueue',
-  addToBouncedQueueName: '${self:service}-add-to-bounced-queue-${self:provider.stage}',
-  addToBouncedQueueArn: {
-    'Fn::Join': [':', ['arn', 'aws', 'sqs', { Ref: 'AWS::Region' }, { Ref: 'AWS::AccountId' }, '${self:custom.addToBouncedQueueName}']],
+  // CreateTodoQueue
+  createTodoQueue: 'CreateTodoQueue',
+  createTodoQueueName: '${self:service}-add-to-bounced-queue-${self:provider.stage}',
+  createTodoQueueArn: {
+    'Fn::Join': [':', ['arn', 'aws', 'sqs', { Ref: 'AWS::Region' }, { Ref: 'AWS::AccountId' }, '${self:custom.createTodoQueueName}']],
   },
-  addToBouncedQueueDLQ: 'AddToBouncedQueueDLQ',
-  addToBouncedQueueDLQName: '${self:service}-add-to-bounced-queue-dlq-${self:provider.stage}',
+  createTodoQueueDLQ: 'CreateTodoQueueDLQ',
+  createTodoQueueDLQName: '${self:service}-add-to-bounced-queue-dlq-${self:provider.stage}',
 
   // MailingTopicSNSRedirection
   mailingTopicRedirectionKeepOtherEventsQueue: 'MailingTopicRedirectionKeepOtherEventsQueue',

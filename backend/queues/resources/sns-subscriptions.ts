@@ -1,25 +1,25 @@
-import { mailgunEventsByEntity } from '@models/mailgun/mailgun-events.model';
+import { QUEUE_EVENTS } from './queues';
 
 /**
  * Don't forgot to add your Subscription in sns.ts > DependsOn and your queue in sns.ts > Queues
  */
 export default {
   // SQS
-  AddToBlacklistSubscription: {
-    DependsOn: ['${self:custom.addToBlacklistQueue}'],
+  HelloSubscription: {
+    DependsOn: ['${self:custom.helloQueue}'],
     Type: 'AWS::SNS::Subscription',
     Properties: {
       Protocol: 'sqs',
       Endpoint: {
-        'Fn::GetAtt': ['${self:custom.addToBlacklistQueue}', 'Arn'],
+        'Fn::GetAtt': ['${self:custom.helloQueue}', 'Arn'],
       },
       TopicArn: {
         Ref: '${self:custom.mailingTopic}',
       },
       FilterPolicyScope: 'MessageBody',
       FilterPolicy: {
-        'event-data': {
-          event: mailgunEventsByEntity.blacklist,
+        queueInfos: {
+          name: QUEUE_EVENTS.HelloQueue,
         },
       },
       RedrivePolicy: {
@@ -30,21 +30,21 @@ export default {
     },
   },
 
-  AddToBouncedSubscription: {
-    DependsOn: ['${self:custom.addToBouncedQueue}'],
+  CreateTodoSubscription: {
+    DependsOn: ['${self:custom.createTodoQueue}'],
     Type: 'AWS::SNS::Subscription',
     Properties: {
       Protocol: 'sqs',
       Endpoint: {
-        'Fn::GetAtt': ['${self:custom.addToBouncedQueue}', 'Arn'],
+        'Fn::GetAtt': ['${self:custom.createTodoQueue}', 'Arn'],
       },
       TopicArn: {
         Ref: '${self:custom.mailingTopic}',
       },
       FilterPolicyScope: 'MessageBody',
       FilterPolicy: {
-        'event-data': {
-          event: mailgunEventsByEntity.bounced,
+        queueInfos: {
+          name: QUEUE_EVENTS.CreateTotoQueue,
         },
       },
       RedrivePolicy: {
@@ -92,7 +92,7 @@ export default {
       FilterPolicyScope: 'MessageBody',
       FilterPolicy: {
         'event-data': {
-          event: [{ 'anything-but': mailgunEventsByEntity.all }],
+          event: [{ 'anything-but': QUEUE_EVENTS.all }],
         },
       },
       RedrivePolicy: {

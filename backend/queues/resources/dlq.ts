@@ -1,15 +1,15 @@
 export default {
-  AddToBlacklistQueueDLQ: {
+  HelloQueueDLQ: {
     Type: 'AWS::SQS::Queue',
     Properties: {
-      QueueName: '${self:custom.addToBlacklistQueueDLQName}',
+      QueueName: '${self:custom.helloQueueDLQName}',
       MessageRetentionPeriod: 1209600, // 14 days in seconds
     },
   },
-  AddToBouncedQueueDLQ: {
+  CreateTodoQueueDLQ: {
     Type: 'AWS::SQS::Queue',
     Properties: {
-      QueueName: '${self:custom.addToBouncedQueueDLQName}',
+      QueueName: '${self:custom.createTodoQueueDLQName}',
       MessageRetentionPeriod: 1209600, // 14 days in seconds
     },
   },

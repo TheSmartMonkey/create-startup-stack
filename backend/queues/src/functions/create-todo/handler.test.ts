@@ -4,13 +4,13 @@
 import { describe, expect, test } from '@jest/globals';
 import { WebhookDuplicatesDb } from '@libs/db/webhook-duplicates/webhook-duplicates.db';
 import { Fake, TEST_EMAIL_2 } from '@libs/tests/fake';
-import { initUnitTests, InitUnitTestsSpies, initUnitTestsSpies } from '@libs/tests/init-unit';
+import { InitUnitTestsSpies, initUnitTests, initUnitTestsSpies } from '@libs/tests/init-unit';
 import { executeLambdaSQS, generateValidatedSQSEvent, mockGetDuplicatesAndNoneDuplicates } from '@libs/tests/mocks';
 import { MODELS } from '@models/api.model';
 import { MailgunEventEnum } from '@models/mailgun/mailgun-events.model';
 import { main } from './handler';
 
-describe('addToBounced unit', () => {
+describe('createTodo unit', () => {
   let initSpies: InitUnitTestsSpies;
   let insertManyBouncedSpy: jest.SpyInstance;
   let getDuplicatesAndNoneDuplicatesSpy: jest.SpyInstance;

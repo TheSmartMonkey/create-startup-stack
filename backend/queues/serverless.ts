@@ -2,8 +2,8 @@ import type { AWS } from '@serverless/typescript';
 import { Routes } from 'src/routes';
 
 // Lambda functions
-import addToBlacklist from './src/functions/hello';
-import addToBounced from './src/functions/create-todo';
+import createTodo from './src/functions/create-todo';
+import hello from './src/functions/hello';
 
 // Resources
 import customQueueNames from 'resources/custom-queue-names';
@@ -85,13 +85,13 @@ const serverlessConfiguration: AWS = {
       AWS_STAGE: '${self:provider.stage}',
 
       // DLQ variables
-      HELLO_QUEUE_DLQ_NAME: '${self:custom.addToBlacklistQueueDLQName}',
-      CREATE_TODO_QUEUE_DLQ_NAME: '${self:custom.addToBouncedQueueDLQName}',
+      HELLO_QUEUE_DLQ_NAME: '${self:custom.helloQueueDLQName}',
+      CREATE_TODO_QUEUE_DLQ_NAME: '${self:custom.createTodoQueueDLQName}',
     },
   },
   functions: {
-    addToBlacklist,
-    addToBounced,
+    hello,
+    createTodo,
   },
   package: {
     // When true optimise lambda performance but increase deployment time

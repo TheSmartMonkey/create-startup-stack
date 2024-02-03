@@ -5,8 +5,8 @@ import { describe, expect, test } from '@jest/globals';
 import { MongooseAdapter } from '@libs/adapter/mongoose.adapter';
 import { Fake, TEST_EMAIL_2 } from '@libs/tests/fake';
 import { Generate } from '@libs/tests/generate';
-import { executeLambdaSQS, generateValidatedSQSEvent } from '@libs/tests/mocks';
 import { initIntegrationTests } from '@libs/tests/init-integration';
+import { executeLambdaSQS, generateValidatedSQSEvent } from '@libs/tests/mocks';
 import { cleanupIntegrationTestsDropMongoDbCollections } from '@libs/tests/utils';
 import { SqsUtils } from '@libs/utils/sqs';
 import { MODELS } from '@models/api.model';
@@ -15,7 +15,7 @@ import { main } from './handler';
 
 jest.setTimeout(20000);
 
-describe('addToBounced integration', () => {
+describe('createTodo integration', () => {
   let sendFailedEventsToDLQSpy: jest.SpyInstance;
 
   beforeAll(async () => {

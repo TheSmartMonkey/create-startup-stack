@@ -17,7 +17,7 @@ import { main } from './handler';
 
 jest.setTimeout(50000);
 
-describe('addToBlacklist integration', () => {
+describe('hello integration', () => {
   let sendFailedEventsToDLQSpy: jest.SpyInstance;
 
   beforeAll(async () => {
