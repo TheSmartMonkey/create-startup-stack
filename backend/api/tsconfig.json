@@ -16,6 +16,7 @@
       "@db/*": ["../../common/db/*"],
       "@helpers/*": ["../../common/helpers/*"],
       "@middlewares/*": ["../../framework/middlewares/*"],
+      "@queues/*": ["../../framework/queues/*"],
       "@models/*": ["../../common/models/*"],
       "@services/*": ["../../common/services/*"],
       "@tests/*": ["../../common/tests/*"],

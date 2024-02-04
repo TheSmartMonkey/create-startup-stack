@@ -8,7 +8,13 @@
       "@models/*": ["models/*"],
       "@sdk/*": ["sdk/*"],
       "@services/*": ["services/*"],
-      "@tests/*": ["tests/*"],
+      "@framework/*": ["../framework/*"],
+      "@tests/*": ["tests/*"]
     }
+  },
+  "include": ["."],
+  "exclude": ["node_modules/**/*"],
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
   }
 }

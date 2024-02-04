@@ -2,7 +2,7 @@
  * @group unit
  */
 import { describe, expect, test } from '@jest/globals';
-import { fakeHelloDto } from '@tests/fake';
+import { fakeHelloDto } from '@tests/fake-dto';
 import { initUnitTests } from '@tests/helper';
 import { helloService } from './hello.service';
 

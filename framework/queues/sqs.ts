@@ -38,6 +38,20 @@ export async function catchSQSEventError<T>(
   await sendFailedEventsToDLQ(dlqMessages, context, dlqName);
 }
 
+export async function sendEventToQueue<T>(events: T[], context: Context, queueName: string) {
+  if (!events.length) return;
+  const entries: SendMessageBatchRequestEntry[] = events.map((event) => {
+    return { Id: generateUniqueId(), MessageBody: formatSQSEvent<T>(event) };
+  });
+  const params = new SendMessageBatchCommand({
+    QueueUrl: getDLQUrl(context, queueName),
+    Entries: entries,
+  });
+  logger.info({ events }, 'Sending events to dlq...');
+  const response = await SQS.send(params).catch((error) => logger.error(error));
+  logger.info({ response }, 'Events has been sent to dlq !');
+}
+
 function getEventFromSQSRecord<T>(sqsRecord: SQSRecord): T | undefined {
   try {
     if (sqsRecord?.body) {

@@ -7,5 +7,6 @@ import { helloService } from './services/hello/hello.service';
 const router = Router();
 
 router.get('/message/:message', dtoValidation(HelloDto), controller(helloService));
+router.get('/queue/message/:message', dtoValidation(HelloDto), controller(helloService));
 
 export default router;
