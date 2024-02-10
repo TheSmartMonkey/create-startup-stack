@@ -1,7 +1,7 @@
 /**
  * @group unit
  */
-import { fakeUser } from '@tests/fake';
+import { fakeUserDao } from '@tests/fake-dao';
 import { initUnitTests, initUnitTestsMocks } from '@tests/helper';
 import { Request, Response } from 'express';
 import { sign } from 'jsonwebtoken';
@@ -10,7 +10,7 @@ import { requireAuthToken } from './require-auth-token.middleware';
 describe('auth token unit', () => {
   let token: string;
   let nextSpy: jest.Mock<any, any>;
-  const user = fakeUser();
+  const user = fakeUserDao();
 
   beforeAll(() => {
     process.env.JWT_TOKEN_SECRET = '1234';

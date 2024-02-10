@@ -1,9 +1,8 @@
 import type { AWS } from '@serverless/typescript';
-import { Routes } from 'src/routes';
 
 // Lambda functions
-import createTodo from './src/functions/create-todo';
-import hello from './src/functions/hello';
+import createTodo from './src/create-todo';
+import hello from './src/hello';
 
 // Resources
 import customQueueNames from 'resources/custom-queue-names';
@@ -21,9 +20,9 @@ const serverlessConfiguration: AWS = {
     envType: '${env:ENV_TYPE, "dev"}',
 
     // SNS Topic
-    mailingTopic: 'MailingTopic',
-    mailingTopicName: '${self:service}-mailing-topic-${self:provider.stage}',
-    mailingTopicArn: { 'Fn::Sub': 'arn:aws:sns:${AWS::Region}:${AWS::AccountId}:${self:custom.mailingTopicName}' },
+    queueServiceTopic: 'QueueServiceTopic',
+    queueServiceTopicName: '${self:service}-topic-${self:provider.stage}',
+    queueServiceTopicArn: { 'Fn::Sub': 'arn:aws:sns:${AWS::Region}:${AWS::AccountId}:${self:custom.queueServiceTopicName}' },
 
     // SQS Queues
     ...customQueueNames,
@@ -39,18 +38,8 @@ const serverlessConfiguration: AWS = {
       concurrency: 10,
       loader: { '.html': 'text' },
     },
-    apiGatewayServiceProxies: [
-      {
-        sns: {
-          path: Routes.SEND_EVENT,
-          method: 'post',
-          topicName: { 'Fn::GetAtt': ['${self:custom.mailingTopic}', 'TopicName'] },
-          cors: true,
-        },
-      },
-    ],
   },
-  plugins: ['serverless-esbuild', 'serverless-deployment-bucket', 'serverless-apigateway-service-proxy'],
+  plugins: ['serverless-esbuild', 'serverless-deployment-bucket'],
   provider: {
     name: 'aws',
     runtime: 'nodejs18.x',
@@ -68,7 +57,7 @@ const serverlessConfiguration: AWS = {
       {
         Effect: 'Allow',
         Action: ['SNS:Publish', 'SNS:Subscribe'],
-        Resource: '${self:custom.mailingTopicArn}',
+        Resource: '${self:custom.queueServiceTopicArn}',
       },
       {
         Effect: 'Allow',

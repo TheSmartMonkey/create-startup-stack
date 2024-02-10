@@ -2,8 +2,8 @@ import { API_SERVICE_BASE_URL } from '@helpers/constants';
 import { Router } from 'express';
 
 // Routes Imports
-import helloRoutes from '@api/hello/routes';
-import todoRoutes from 'src/todo/routes';
+import helloRoutes from '@src/hello/routes';
+import todoRoutes from '@src/todo/routes';
 
 const router = Router();
 

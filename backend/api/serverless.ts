@@ -1,5 +1,5 @@
+import { API_SERVICE_BASE_URL } from '@helpers/constants';
 import type { AWS } from '@serverless/typescript';
-import { API_SERVICE_BASE_URL } from 'src/helpers/constants';
 
 const serverlessConfiguration: AWS = {
   service: 'api-service',
@@ -7,6 +7,12 @@ const serverlessConfiguration: AWS = {
   useDotenv: true,
   custom: {
     stageType: '${opt:stage, env:AWS_STAGE, "dev"}',
+
+    // QUEUE_SERVICE_SNS_TOPIC
+    queueServiceName: 'queue-service',
+    queueServiceTopic: 'QueueServiceTopic',
+    queueServiceTopicName: '${self:custom.queueServiceName}-topic-${self:provider.stage}',
+    queueServiceTopicArn: { 'Fn::Sub': 'arn:aws:sns:${AWS::Region}:${AWS::AccountId}:${self:custom.queueServiceTopicName}' },
 
     esbuild: {
       bundle: true,
@@ -33,6 +39,13 @@ const serverlessConfiguration: AWS = {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
     },
+    iamRoleStatements: [
+      {
+        Effect: 'Allow',
+        Action: ['SNS:Publish', 'SNS:Subscribe'],
+        Resource: '${self:custom.queueServiceTopicArn}',
+      },
+    ],
     environment: {
       AWS_STAGE: '${self:custom.stageType}',
 
@@ -41,6 +54,9 @@ const serverlessConfiguration: AWS = {
       MONGODB_USERNAME: '${env:MONGODB_USERNAME}',
       MONGODB_PASSWORD: '${env:MONGODB_PASSWORD}',
       MONGODB_NAME: '${env:MONGODB_NAME}',
+
+      // SNS topics
+      QUEUE_SERVICE_SNS_TOPIC_ARN: '${self:custom.queueServiceTopicArn}',
 
       // Secure credentials in AWS Systems Manager Parameter Store
       JWT_TOKEN_SECRET: '${ssm:JWT_TOKEN_SECRET}',

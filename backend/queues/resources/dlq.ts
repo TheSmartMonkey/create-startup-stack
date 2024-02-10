@@ -13,24 +13,10 @@ export default {
       MessageRetentionPeriod: 1209600, // 14 days in seconds
     },
   },
-  MailingTopicRedirectionKeepAllMessagesQueue: {
+  QueueServiceTopicRedirectionQueueDLQ: {
     Type: 'AWS::SQS::Queue',
     Properties: {
-      QueueName: '${self:custom.mailingTopicRedirectionKeepAllMessagesQueueName}',
-      MessageRetentionPeriod: 1209600, // 14 days in seconds
-    },
-  },
-  MailingTopicRedirectionKeepOtherEventsQueue: {
-    Type: 'AWS::SQS::Queue',
-    Properties: {
-      QueueName: '${self:custom.mailingTopicRedirectionKeepOtherEventsQueueName}',
-      MessageRetentionPeriod: 1209600, // 14 days in seconds
-    },
-  },
-  MailingTopicRedirectionQueueDLQ: {
-    Type: 'AWS::SQS::Queue',
-    Properties: {
-      QueueName: '${self:custom.mailingTopicRedirectionQueueDLQName}',
+      QueueName: '${self:custom.queueServiceTopicRedirectionQueueDLQName}',
       MessageRetentionPeriod: 1209600, // 14 days in seconds
     },
   },

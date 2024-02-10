@@ -1,4 +1,4 @@
-import { QUEUE_EVENTS } from './queues';
+import { QUEUE_SERVICE_QUEUE_EVENTS } from '@models/queues/queue-service-events';
 
 /**
  * Don't forgot to add your Subscription in sns.ts > DependsOn and your queue in sns.ts > Queues
@@ -14,17 +14,15 @@ export default {
         'Fn::GetAtt': ['${self:custom.helloQueue}', 'Arn'],
       },
       TopicArn: {
-        Ref: '${self:custom.mailingTopic}',
+        Ref: '${self:custom.queueServiceTopic}',
       },
       FilterPolicyScope: 'MessageBody',
       FilterPolicy: {
-        queueInfos: {
-          name: QUEUE_EVENTS.HelloQueue,
-        },
+        eventType: QUEUE_SERVICE_QUEUE_EVENTS.HelloQueue,
       },
       RedrivePolicy: {
         deadLetterTargetArn: {
-          'Fn::GetAtt': ['${self:custom.mailingTopicRedirectionQueueDLQ}', 'Arn'],
+          'Fn::GetAtt': ['${self:custom.queueServiceTopicRedirectionQueueDLQ}', 'Arn'],
         },
       },
     },
@@ -39,65 +37,15 @@ export default {
         'Fn::GetAtt': ['${self:custom.createTodoQueue}', 'Arn'],
       },
       TopicArn: {
-        Ref: '${self:custom.mailingTopic}',
+        Ref: '${self:custom.queueServiceTopic}',
       },
       FilterPolicyScope: 'MessageBody',
       FilterPolicy: {
-        queueInfos: {
-          name: QUEUE_EVENTS.CreateTotoQueue,
-        },
+        eventType: QUEUE_SERVICE_QUEUE_EVENTS.CreateTodoQueue,
       },
       RedrivePolicy: {
         deadLetterTargetArn: {
-          'Fn::GetAtt': ['${self:custom.mailingTopicRedirectionQueueDLQ}', 'Arn'],
-        },
-      },
-    },
-  },
-  MailingTopicRedirectionKeepAllMessagesSubscription: {
-    DependsOn: ['${self:custom.mailingTopicRedirectionKeepAllMessagesQueue}'],
-    Type: 'AWS::SNS::Subscription',
-    Properties: {
-      Protocol: 'sqs',
-      Endpoint: {
-        'Fn::GetAtt': ['${self:custom.mailingTopicRedirectionKeepAllMessagesQueue}', 'Arn'],
-      },
-      TopicArn: {
-        Ref: '${self:custom.mailingTopic}',
-      },
-      FilterPolicyScope: 'MessageBody',
-      FilterPolicy: {
-        'event-data': {
-          event: [{ exists: false }],
-        },
-      },
-      RedrivePolicy: {
-        deadLetterTargetArn: {
-          'Fn::GetAtt': ['${self:custom.mailingTopicRedirectionQueueDLQ}', 'Arn'],
-        },
-      },
-    },
-  },
-  MailingTopicRedirectionKeepOtherEventsSubscription: {
-    DependsOn: ['${self:custom.mailingTopicRedirectionKeepOtherEventsQueue}'],
-    Type: 'AWS::SNS::Subscription',
-    Properties: {
-      Protocol: 'sqs',
-      Endpoint: {
-        'Fn::GetAtt': ['${self:custom.mailingTopicRedirectionKeepOtherEventsQueue}', 'Arn'],
-      },
-      TopicArn: {
-        Ref: '${self:custom.mailingTopic}',
-      },
-      FilterPolicyScope: 'MessageBody',
-      FilterPolicy: {
-        'event-data': {
-          event: [{ 'anything-but': QUEUE_EVENTS.all }],
-        },
-      },
-      RedrivePolicy: {
-        deadLetterTargetArn: {
-          'Fn::GetAtt': ['${self:custom.mailingTopicRedirectionQueueDLQ}', 'Arn'],
+          'Fn::GetAtt': ['${self:custom.queueServiceTopicRedirectionQueueDLQ}', 'Arn'],
         },
       },
     },

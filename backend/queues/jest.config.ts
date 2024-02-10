@@ -9,7 +9,7 @@ export default {
     '@src/(.*)': '<rootDir>/src/$1',
     '@db/(.*)': '<rootDir>/../../common/db/$1',
     '@helpers/(.*)': '<rootDir>/../../common/helpers/$1',
-    '@middlewares/(.*)': '<rootDir>/../../framework/middlewares/$1',
+    '@queues/(.*)': '<rootDir>/../../framework/queues/$1',
     '@models/(.*)': '<rootDir>/../../common/models/$1',
     '@services/(.*)': '<rootDir>/../../common/services/$1',
     '@tests/(.*)': '<rootDir>/../../common/tests/$1',

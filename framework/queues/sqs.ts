@@ -4,7 +4,7 @@ import { logger } from '@helpers/logger';
 import { Context, SQSEvent, SQSRecord } from 'aws-lambda';
 import { eventToEventDLQs } from './dlq';
 
-const SQS = new SQSClient({ region: process.env.AWS_REGION ?? 'eu-west-3' });
+let SQS_CLIENT: SQSClient;
 
 export function getEventsFromSQSRecords<T>(sqsRecords: SQSRecord[]): T[] {
   const events = sqsRecords.map((sqsRecord) => getEventFromSQSRecord(sqsRecord)) ?? [];
@@ -22,7 +22,8 @@ export async function sendFailedEventsToDLQ<T>(events: T[], context: Context, dl
     Entries: entries,
   });
   logger.info({ events }, 'Sending events to dlq...');
-  const response = await SQS.send(params).catch((error) => logger.error(error));
+  const sqs = initSQS();
+  const response = await sqs.send(params).catch((error) => logger.error(error));
   logger.info({ response }, 'Events has been sent to dlq !');
 }
 
@@ -38,18 +39,10 @@ export async function catchSQSEventError<T>(
   await sendFailedEventsToDLQ(dlqMessages, context, dlqName);
 }
 
-export async function sendEventToQueue<T>(events: T[], context: Context, queueName: string) {
-  if (!events.length) return;
-  const entries: SendMessageBatchRequestEntry[] = events.map((event) => {
-    return { Id: generateUniqueId(), MessageBody: formatSQSEvent<T>(event) };
-  });
-  const params = new SendMessageBatchCommand({
-    QueueUrl: getDLQUrl(context, queueName),
-    Entries: entries,
-  });
-  logger.info({ events }, 'Sending events to dlq...');
-  const response = await SQS.send(params).catch((error) => logger.error(error));
-  logger.info({ response }, 'Events has been sent to dlq !');
+function initSQS() {
+  if (SQS_CLIENT) return SQS_CLIENT;
+  SQS_CLIENT = new SQSClient({ region: process.env.AWS_REGION ?? 'eu-west-3' });
+  return SQS_CLIENT;
 }
 
 function getEventFromSQSRecord<T>(sqsRecord: SQSRecord): T | undefined {

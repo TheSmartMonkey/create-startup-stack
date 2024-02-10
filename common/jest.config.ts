@@ -11,6 +11,7 @@ export default {
     '@helpers/(.*)': '<rootDir>/helpers/$1',
     '@models/(.*)': '<rootDir>/models/$1',
     '@sdk/(.*)': '<rootDir>/sdk/$1',
+    '@services/(.*)': '<rootDir>/services/$1',
     '@tests/(.*)': '<rootDir>/tests/$1',
   },
   reporters: ['default'],

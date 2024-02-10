@@ -1,8 +1,8 @@
 export default {
-  MailingTopic: {
+  QueueServiceTopic: {
     Type: 'AWS::SNS::Topic',
     Properties: {
-      TopicName: '${self:custom.mailingTopicName}',
+      TopicName: '${self:custom.queueServiceTopicName}',
     },
   },
   SnsQueuePolicy: {
@@ -23,16 +23,14 @@ export default {
       Queues: [
         { Ref: '${self:custom.helloQueue}' },
         { Ref: '${self:custom.createTodoQueue}' },
-        { Ref: '${self:custom.mailingTopicRedirectionKeepOtherEventsQueue}' },
-        { Ref: '${self:custom.mailingTopicRedirectionKeepAllMessagesQueue}' },
-        { Ref: '${self:custom.mailingTopicRedirectionQueueDLQ}' },
+
+        // SNS DLQ
+        { Ref: '${self:custom.queueServiceTopicRedirectionQueueDLQ}' },
       ],
     },
     DependsOn: [
       'HelloSubscription',
       'CreateTodoSubscription',
-      'MailingTopicRedirectionKeepAllMessagesSubscription',
-      'MailingTopicRedirectionKeepOtherEventsSubscription',
     ],
   },
 };

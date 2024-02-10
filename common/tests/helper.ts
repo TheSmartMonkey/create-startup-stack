@@ -1,6 +1,6 @@
-import * as sqs from '@framework/queues/sqs';
 import { logger } from '@helpers/logger';
 import * as dotenv from 'dotenv';
+import * as sqs from './../../framework/queues/sqs';
 
 export type InitUnitTestsMocks = {
   sendFailedEventsToDLQSpy: jest.SpyInstance;
