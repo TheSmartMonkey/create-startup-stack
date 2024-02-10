@@ -1,7 +1,6 @@
 /**
  * @group integration
  */
-import { describe, expect, test } from '@jest/globals';
 import { initIntegrationTests } from '@tests/helper';
 
 describe('hello integration', () => {
