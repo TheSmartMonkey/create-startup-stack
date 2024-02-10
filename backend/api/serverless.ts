@@ -2,14 +2,14 @@ import { API_SERVICE_BASE_URL } from '@helpers/constants';
 import type { AWS } from '@serverless/typescript';
 
 const serverlessConfiguration: AWS = {
-  service: 'api-service',
+  service: 'myProjectName-api-service',
   frameworkVersion: '3',
   useDotenv: true,
   custom: {
     stageType: '${opt:stage, env:AWS_STAGE, "dev"}',
 
     // QUEUE_SERVICE_SNS_TOPIC
-    queueServiceName: 'queue-service',
+    queueServiceName: 'myProjectName-queue-service',
     queueServiceTopic: 'QueueServiceTopic',
     queueServiceTopicName: '${self:custom.queueServiceName}-topic-${self:provider.stage}',
     queueServiceTopicArn: { 'Fn::Sub': 'arn:aws:sns:${AWS::Region}:${AWS::AccountId}:${self:custom.queueServiceTopicName}' },

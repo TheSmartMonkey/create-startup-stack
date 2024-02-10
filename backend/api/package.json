@@ -1,5 +1,5 @@
 {
-  "name": "api-service",
+  "name": "myProjectName-api-service",
   "version": "1.0.0",
   "main": "dist/server.js",
   "scripts": {

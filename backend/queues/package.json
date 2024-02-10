@@ -1,5 +1,5 @@
 {
-  "name": "queue-service",
+  "name": "myProjectName-queue-service",
   "version": "1.0.0",
   "scripts": {
     "lint": "eslint src --ext .ts",

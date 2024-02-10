@@ -7,3 +7,7 @@ Dev stack perfect to create a startup saas application that is architectured for
 ```sh
 npx degit https://github.com/TheSmartMonkey/create-startup-stack.git startup-stack
 ```
+
+## Getting started
+
+Rename all `myProjectName` with you project name
