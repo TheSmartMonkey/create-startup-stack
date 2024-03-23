@@ -10,4 +10,4 @@ npx degit https://github.com/TheSmartMonkey/create-startup-stack.git startup-sta
 
 ## Getting started
 
-Rename all `myProjectName` with you project name
+Rename all `my-project-name` with you project name

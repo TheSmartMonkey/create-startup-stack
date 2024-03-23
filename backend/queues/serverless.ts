@@ -12,7 +12,7 @@ import snsSubscriptions from 'resources/sns-subscriptions';
 import sqs from 'resources/sqs';
 
 const serverlessConfiguration: AWS = {
-  service: 'myProjectName-queue-service',
+  service: 'my-project-name-queue-service',
   frameworkVersion: '3',
   useDotenv: true,
   custom: {

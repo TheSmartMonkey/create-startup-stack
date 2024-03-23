@@ -1,1 +1,1 @@
-export const API_SERVICE_BASE_URL = '/myProjectName-api-service/api';
+export const API_SERVICE_BASE_URL = '/my-project-name-api-service/api';

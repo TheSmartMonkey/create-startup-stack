@@ -30,6 +30,7 @@ export function backendPrompts() {
       },
       type: 'input',
       name: 'path',
+      // TODO: update api-service templates
       message: 'Choose path (ex: api-service/src/api/hello/services)',
     },
   ];

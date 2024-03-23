@@ -1,5 +1,10 @@
 {
   "name": "framework",
+  "scripts": {
+    "test": "npm run unit && npm run integration",
+    "unit": "cross-env-shell NO_LOGS=true jest --group=unit",
+    "integration": "cross-env-shell NO_LOGS=true jest --group=integration --maxWorkers=1"
+  },
   "dependencies": {
     "@aws-sdk/client-sqs": "^3.282.0",
     "express": "^4.18.2",

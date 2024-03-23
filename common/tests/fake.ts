@@ -1,5 +1,5 @@
 import { generateUniqueId } from '@helpers/helper';
-import { QueueServiceQueueEvent } from '@models/queues/queue-service-events';
+import { QueueServiceQueueEventType } from '@models/queues/queue-service-events';
 import { SQSRecord } from 'aws-lambda';
 
 export function fakeSqsRecord<T>(event: T, partial?: Partial<SQSRecord>): SQSRecord {
@@ -26,10 +26,10 @@ export function fakeSqsRecord<T>(event: T, partial?: Partial<SQSRecord>): SQSRec
 
 export function fakeSqsEvent<T>(
   event: T,
-  eventType: QueueServiceQueueEvent,
+  eventType: QueueServiceQueueEventType,
 ): {
   event: T;
-  eventType: QueueServiceQueueEvent;
+  eventType: QueueServiceQueueEventType;
 } {
   return {
     event,

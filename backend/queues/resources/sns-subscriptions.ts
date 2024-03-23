@@ -18,7 +18,7 @@ export default {
       },
       FilterPolicyScope: 'MessageBody',
       FilterPolicy: {
-        eventType: QUEUE_SERVICE_QUEUE_EVENTS.HelloQueue,
+        eventType: QUEUE_SERVICE_QUEUE_EVENTS.HELLO_QUEUE,
       },
       RedrivePolicy: {
         deadLetterTargetArn: {
@@ -41,7 +41,7 @@ export default {
       },
       FilterPolicyScope: 'MessageBody',
       FilterPolicy: {
-        eventType: QUEUE_SERVICE_QUEUE_EVENTS.CreateTodoQueue,
+        eventType: QUEUE_SERVICE_QUEUE_EVENTS.CREATE_TODO_QUEUE,
       },
       RedrivePolicy: {
         deadLetterTargetArn: {
