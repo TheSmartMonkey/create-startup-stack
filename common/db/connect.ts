@@ -1,5 +1,5 @@
 import mongoose, { Mongoose } from 'mongoose';
-import { logger } from '../helpers/logger';
+import { log } from '../helpers/logger';
 
 export let mongoDbConnection: Mongoose;
 
@@ -8,16 +8,16 @@ export class MongoDbAdapter {
     try {
       if (mongoDbConnection) return mongoDbConnection;
 
-      logger.info('Connecting to mongodb...');
+      log.info('Connecting to mongodb...');
       mongoose.set('strictQuery', false);
       const mongoDbUri = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.ATLAS_DB_URL}/${process.env.MONGODB_NAME}?retryWrites=true&w=majority`;
       mongoDbConnection = await mongoose.connect(mongoDbUri, {
         serverSelectionTimeoutMS: 5000,
       });
-      logger.info('Connected to mongodb !');
+      log.info('Connected to mongodb !');
       return mongoDbConnection;
     } catch (error: any) {
-      logger.error(error.message);
+      log.error(error.message);
       throw error;
     }
   }

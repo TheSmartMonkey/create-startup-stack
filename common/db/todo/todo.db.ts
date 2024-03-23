@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto';
-import { logger } from '../../helpers/logger';
+import { log } from '../../helpers/logger';
 import { CreateTodoDao, GetTodoByIdDao, TodoDao } from './todo.dao';
 
 export async function getAllTodosDb(): Promise<TodoDao[]> {
@@ -25,7 +25,7 @@ export async function getTodoByIdDb({ data }: { data: GetTodoByIdDao }): Promise
     title: 'todo1',
     step: 1,
   };
-  logger.info({ todo, originalUrl: process.env.originalUrl });
+  log.info({ todo, originalUrl: process.env.originalUrl });
   return todo;
 }
 

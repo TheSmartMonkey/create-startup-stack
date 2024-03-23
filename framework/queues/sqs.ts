@@ -1,6 +1,6 @@
 import { SQSClient, SendMessageBatchCommand, SendMessageBatchRequestEntry } from '@aws-sdk/client-sqs';
 import { generateUniqueId } from '@helpers/helper';
-import { logger } from '@helpers/logger';
+import { log } from '@helpers/logger';
 import { Context, SQSEvent, SQSRecord } from 'aws-lambda';
 import { eventToEventDLQs } from './dlq';
 
@@ -8,7 +8,7 @@ let SQS_CLIENT: SQSClient;
 
 export function getEventsFromSQSRecords<T>(sqsRecords: SQSRecord[]): T[] {
   const events = sqsRecords.map((sqsRecord) => getEventFromSQSRecord(sqsRecord)) ?? [];
-  logger.info({ events });
+  log.info({ events });
   return events as T[];
 }
 
@@ -21,10 +21,10 @@ export async function sendFailedEventsToDLQ<T>(events: T[], context: Context, dl
     QueueUrl: getDLQUrl(context, dlqName),
     Entries: entries,
   });
-  logger.info({ events }, 'Sending events to dlq...');
+  log.info({ events }, 'Sending events to dlq...');
   const sqs = initSQS();
-  const response = await sqs.send(params).catch((error) => logger.error(error));
-  logger.info({ response }, 'Events has been sent to dlq !');
+  const response = await sqs.send(params).catch((error) => log.error(error));
+  log.info({ response }, 'Events has been sent to dlq !');
 }
 
 export async function catchSQSEventError<T>(
@@ -33,7 +33,7 @@ export async function catchSQSEventError<T>(
   dlqName: string | undefined,
   { error }: { error?: any },
 ): Promise<void> {
-  logger.error({ error });
+  log.error({ error });
   const messages = getEventsFromSQSRecords<T>(event?.Records);
   const dlqMessages = eventToEventDLQs(messages, dlqName, 'UNKNOWN_ERROR', { error });
   await sendFailedEventsToDLQ(dlqMessages, context, dlqName);
@@ -52,7 +52,7 @@ function getEventFromSQSRecord<T>(sqsRecord: SQSRecord): T | undefined {
       return JSON.parse(body.Message);
     }
   } catch {
-    logger.error(sqsRecord?.body);
+    log.error(sqsRecord?.body);
   }
   return undefined;
 }

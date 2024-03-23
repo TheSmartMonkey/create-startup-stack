@@ -1,5 +1,5 @@
 import { generateUniqueId } from '@helpers/helper';
-import { logger } from '@helpers/logger';
+import { log } from '@helpers/logger';
 import { SendSNSEvent } from '@models/queues/queue-service-events';
 import { SNS } from 'aws-sdk';
 import { PublishBatchRequestEntry } from 'aws-sdk/clients/sns';
@@ -16,10 +16,10 @@ export async function sendEventsToSNS<T>(sendSNSEvent: SendSNSEvent<T>): Promise
     PublishBatchRequestEntries: entries,
     TopicArn: topicArn,
   };
-  logger.info({ events }, 'Sending events to sns...');
+  log.info({ events }, 'Sending events to sns...');
   const sns = initSNS();
   const response = await sns.publishBatch(params).promise();
-  logger.info({ response }, 'Events has been sent to sns !');
+  log.info({ response }, 'Events has been sent to sns !');
 }
 
 function initSNS() {

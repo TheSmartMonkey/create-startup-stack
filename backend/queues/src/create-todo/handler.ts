@@ -1,4 +1,4 @@
-import { logger } from '@helpers/logger';
+import { log } from '@helpers/logger';
 import { Todo } from '@models/todo.model';
 import { eventToEventDLQs } from '@queues/dlq';
 import { catchSQSEventError, getEventsFromSQSRecords, sendFailedEventsToDLQ } from '@queues/sqs';
@@ -13,7 +13,7 @@ export async function main(event: SQSEvent, context: Context): Promise<void> {
     const events = getEventsFromSQSRecords<Todo>(event?.Records);
     if (!events.length) return;
 
-    logger.info({ events });
+    log.info({ events });
 
     // Add not processed messages to Dead Letter Queue
     const dlqName = process.env.CREATE_TODO_QUEUE_DLQ_NAME;

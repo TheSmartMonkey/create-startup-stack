@@ -1,4 +1,4 @@
-import { logger } from '@helpers/logger';
+import { log } from '@helpers/logger';
 import { validateOrReject } from 'class-validator';
 import { NextFunction, Request, Response } from 'express';
 
@@ -7,7 +7,7 @@ export function dtoValidation<T>(type: new () => T) {
     try {
       // Concatenate data
       req.body = { ...req.params, ...req.body, ...req.query };
-      logger.info({ bodyDtoValidation: req?.body, originalUrl: req.originalUrl });
+      log.info({ bodyDtoValidation: req?.body, originalUrl: req.originalUrl });
 
       // Validate data
       const objectToValidate = new type();

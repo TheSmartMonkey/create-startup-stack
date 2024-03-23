@@ -1,4 +1,4 @@
-import { logger } from '@helpers/logger';
+import { log } from '@helpers/logger';
 import * as dotenv from 'dotenv';
 import * as sqs from './../../framework/queues/sqs';
 
@@ -8,7 +8,7 @@ export type InitUnitTestsMocks = {
 
 export function initUnitTests(): void {
   dotenv.config();
-  logger.level = process.env.NO_LOGS === 'true' ? 'fatal' : 'debug';
+  log.level = process.env.NO_LOGS === 'true' ? 'fatal' : 'debug';
 }
 
 export function initUnitTestsMocks(): InitUnitTestsMocks {
@@ -19,6 +19,6 @@ export function initUnitTestsMocks(): InitUnitTestsMocks {
 
 export function initIntegrationTests(): void {
   dotenv.config();
-  logger.level = process.env.NO_LOGS === 'true' ? 'fatal' : 'debug';
+  log.level = process.env.NO_LOGS === 'true' ? 'fatal' : 'debug';
   process.env.OFFLINE = 'true';
 }

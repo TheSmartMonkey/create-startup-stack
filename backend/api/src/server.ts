@@ -1,5 +1,5 @@
 import { API_SERVICE_BASE_URL } from '@helpers/constants';
-import { logger } from '@helpers/logger';
+import { log } from '@helpers/logger';
 import { errorHandlerMiddleware } from '@middlewares/error.middleware';
 import { sendJsonMiddleware } from '@middlewares/send-json.middleware';
 import { HttpError } from '@models/global/http-error.model';
@@ -27,7 +27,7 @@ app.use(errorHandlerMiddleware);
 // Launch
 if (process.env.LOCAL === 'true') {
   const port = process.env.PORT ?? 3001;
-  app.listen(port, () => logger.info(`App listening at http://localhost:${port}${API_SERVICE_BASE_URL}`));
+  app.listen(port, () => log.info(`App listening at http://localhost:${port}${API_SERVICE_BASE_URL}`));
 }
 module.exports.handler = serverless(app, {
   request: function (req: { event: any; context: any }, event: any, context: any) {
